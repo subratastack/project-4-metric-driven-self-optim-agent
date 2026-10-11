@@ -1,0 +1,71 @@
+[build-system]
+# Core and development dependency installation approved on 2026-10-11.
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "project-4-metric-driven-self-optim-agent"
+version = "0.1.0"
+description = "Scaffold for a local metric-driven optimization control loop"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+# Approved direct dependencies; exact transitive versions are recorded in uv.lock.
+dependencies = [
+  "alembic==1.20.0",
+  "dspy==3.4.0",
+  "inspect-ai==0.3.278",
+  "mlflow==3.17.0",
+  "numpy==2.5.4",
+  "opentelemetry-api==1.45.1",
+  "opentelemetry-exporter-otlp-proto-http==1.45.1",
+  "opentelemetry-sdk==1.45.1",
+  "psycopg==3.3.6",
+  "pydantic==2.14.0",
+  "pydantic-settings==2.15.0",
+  "scipy==1.18.1",
+  "sqlalchemy==2.1.4",
+]
+
+[dependency-groups]
+dev = [
+  "hatchling==1.32.4",
+  "hypothesis==6.169.0",
+  "mypy==2.4.0",
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "ruff==0.17.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apps"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+markers = [
+  "integration: requires explicitly configured local services",
+  "evaluation: checks evaluation contracts and reproducibility",
+  "optimization: checks bounded candidate generation and promotion",
+  "adversarial: exercises hard constraints and failure cases",
+  "regression: compares frozen expected behavior",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+
+[tool.coverage.run]
+branch = true
+source = ["apps"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

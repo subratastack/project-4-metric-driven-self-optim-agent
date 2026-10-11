@@ -1,0 +1,28 @@
+# Infrastructure scaffold only. Do not pull/start before dependency approval.
+# Explicit profile prevents this service starting with an ordinary compose up.
+name: project-4-metric-driven-self-optim-agent
+
+services:
+  postgres:
+    profiles: [infrastructure]
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-metric_optimizer}
+      POSTGRES_USER: ${POSTGRES_USER:-metric_optimizer}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-project4_local_only}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - metric-optimizer-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  metric-optimizer-postgres:

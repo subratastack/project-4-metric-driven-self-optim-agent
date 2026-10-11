@@ -1,0 +1,36 @@
+# Local secrets and environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python and development output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.egg-info/
+dist/
+build/
+.idea/
+.DS_Store
+
+# Generated experiments, model caches, and local service state
+artifacts/
+mlruns/
+mlartifacts/
+logs/
+checkpoints/
+.cache/
+data/
+*.db
+*.db-shm
+*.db-wal
+/graft/
