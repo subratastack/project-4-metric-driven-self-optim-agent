@@ -1,10 +1,18 @@
 # Metric-driven optimization architecture
 
-**Status:** Phase 0 design finalized, 2026-10-11. All application modules remain
-scaffolds. This document describes the required system, not deployed behavior.
+**Status:** Phase 0 design finalized; Phase 1 baseline, validation and scoring
+implemented, 2026-10-11. The [Phase 1 review](docs/phase-1-review.md) distinguishes
+working code, the recorded Qwen3 local check and pending dataset review. Later components
+below remain design requirements, not deployed behavior.
 The [Notion guided build](https://app.notion.com/p/3e8456c5513581f89164d6f511de8f70)
 is the curriculum source; the versioned contracts below settle this project's
 initial engineering choices.
+
+The application now has a [model provider strategy](docs/model-providers.md) for
+the verified local Ollama adapter and an explicit `.env`-selected OpenRouter
+model. The generalized client is separate from the frozen local benchmark;
+remote benchmark admission is not implemented. Provider tests use mocked HTTP,
+and no live OpenRouter call has been made.
 
 ## Purpose and first target
 
@@ -162,13 +170,15 @@ wall-clock timeout cancels further work and prevents promotion even if a late
 provider response arrives. This is a requirement for future accounting, not a
 claim that installed libraries already enforce it.
 
-## Implementation boundary after Phase 0
+## Implementation boundary after Phase 1
 
-Phase 0 completes design, not the Phase 1 baseline, dataset or metrics. The next
-implementation request can build validators, a frozen baseline artifact and
-50–100 reviewed cases with deterministic correctness/safety scorers. The
-reference release targets 100 cases. Do not run an optimizer before the earlier
-guided review gates have been satisfied.
+Phase 1 supplies the baseline core and frozen implementation bytes, strict
+validators, deterministic scorers, a sequential runner and 100 synthetic draft
+cases. The selected Qwen3 adapter has completed local conformance verification,
+with five schema-invalid baseline outputs recorded. Independent label review
+remains pending; see the [review](docs/phase-1-review.md). Paired statistics,
+judges, optimizer modules, persistence and promotion remain deferred. Do not run
+an optimizer before the earlier guided review gates have been satisfied.
 
 Actual model/digest/license selection, the real dataset release and its review,
 benchmark hardware binding, and Project 1 adapter conformance are execution

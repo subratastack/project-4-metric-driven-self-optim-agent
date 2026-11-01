@@ -1,5 +1,8 @@
 # Phase 0 review record
 
+This is the historical design-only record. Current implementation status is in
+the [Phase 1 review](phase-1-review.md).
+
 **Status:** documentation complete, 2026-10-11. The contracts and first three
 ADRs are accepted as the v1 implementation design. This does not attest to
 working code, reviewed dataset labels, measured improvement or deployment approval.

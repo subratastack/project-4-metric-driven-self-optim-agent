@@ -1,7 +1,9 @@
 # Metric and comparison contract v1
 
-**Status:** accepted Phase 0 specification, 2026-10-11. No scorers, measurements,
-confidence intervals, or promotion gates have been implemented or run.
+**Status:** accepted Phase 0 specification; deterministic snapshot scorers and
+sequential run accounting implemented in Phase 1, 2026-10-11. No real model
+measurements, confidence intervals or promotion gates have been produced.
+Sections 5–7 remain later-phase requirements; see the [Phase 1 review](phase-1-review.md).
 
 A candidate must make better decisions without gaining credit for missing
 answers or forbidden actions. Keep correctness, safety, evidence support and

@@ -1,10 +1,11 @@
 # Project instructions
 
-This project currently contains a scaffold only. Follow the user's requested
-phase; do not infer authorization to implement features from the roadmap.
+Phase 1 implements the baseline core, dataset validation and deterministic scorers.
+Follow the user's requested phase; do not infer authorization for later features
+or live model execution from the roadmap. See docs/phase-1-review.md for status.
 
 Before installing any dependency, present its library name and license and
-obtain the user's approval. The current proposal is in `docs/dependencies.md`.
+obtain the user's approval. The installed dependency record is in `docs/dependencies.md`.
 This applies to build/development tools and service/model downloads as well as
 runtime libraries. Approval for environment setup alone does not authorize
 feature implementation.

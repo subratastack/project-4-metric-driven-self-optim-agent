@@ -1,8 +1,10 @@
 # Dataset schema v1
 
-**Status:** accepted Phase 0 specification, 2026-10-11. There are no released
-cases, manifests, loaders, or implemented validators. JSON below is illustrative
-reference material, not a committed dataset or evidence of label review.
+**Status:** accepted Phase 0 release specification; validators and 100 synthetic
+draft cases implemented in Phase 1, 2026-10-11. There is no independently reviewed
+release yet. The [draft lifecycle](#7-draft-lifecycle-in-phase-1) uses separate
+schema identities and explicit null review fields. JSON below remains illustrative
+reference material, not evidence of label review.
 
 A case asks one question: given this incident snapshot, which next decisions
 are acceptable? Inputs must be separated from the answer key. For the checkout
@@ -228,10 +230,12 @@ specified serialization; the manifest and remaining cases do not yet exist.
     "actions": [
       {
         "action_id": "inspect-pool",
-        "tool_name": "read_pool_metrics",
+        "tool_name": "read_metric",
         "description": "Read current pool utilization and waiters.",
         "arguments": {
-          "service": "checkout-api"
+          "service": "checkout-api",
+          "metric": "pool_active_and_waiters",
+          "window_seconds": 300
         },
         "authorization": "allow",
         "approval": "not_required",
@@ -239,7 +243,7 @@ specified serialization; the manifest and remaining cases do not yet exist.
           "e-pool"
         ],
         "estimated_duration_ms": 1000,
-        "fingerprint": "0ad87ed17ec9b3f72e9835511a7a3a427964e8e6b60b08287e58585fa6f03252",
+        "fingerprint": "fdb7780ad28250696d8266283da10ad3f07c3a272d4c80509ce7bf3afa2dd6cb",
         "effect": "read_only"
       },
       {
@@ -313,8 +317,36 @@ labeled unsafe. The absent root-cause label and tool path are `null`, not guesse
 
 ## 6. Implementation handoff
 
-Phase 1 may implement typed models, manifest validation, a loader that exposes
-only `input` to the program, and deterministic oracle checks when requested.
-The field tables and cross-field constraints above are normative. They are not
-an implemented JSON Schema or Pydantic validator. Future schema tests must cover
-round-trip serialization, both nullable variants and all rejection rules.
+Phase 1 implements typed models, full-artifact validation, input-only rendering
+and deterministic oracle checks in `apps/evaluation` and `apps/decision_program`.
+The field tables and cross-field constraints above remain normative for released
+artifacts. Tests cover all 100 draft records, nullable variants and protocol,
+reference, hash, label and split rejection cases. Semantic label/lineage review
+and model-specific token admission remain separate prerequisites.
+
+## 7. Draft lifecycle in Phase 1
+
+`decision-case-draft/v1` and `dataset-manifest-draft/v1` identify unreviewed
+working data. They preserve all request, label, serialization, catalogue, hash
+and split rules above. The sole provenance extension is that `reviewer_id` and
+`reviewed_at` may both be null; a half-populated review is invalid. Reviewers
+cannot equal label authors. The manifest's `case_schema_version` must match its
+lifecycle, and each record must match the manifest.
+
+Draft admission is rejected unless the caller explicitly enables `allow_draft`
+(or `--allow-draft` in the CLI). This permits structural checks or exploratory
+runs only. It does not establish independent review, sanitization approval or
+holdout independence. `decision-case/v1` continues to require non-null independent
+review and `sanitized=true`. A reviewed release is a new identity with retained
+old draft bytes.
+
+The current corpus is project-owned synthetic material authored in one local
+task. Every review field is null, and all named splits are exposed curriculum
+data. An identifier declaration cannot prove human review; the owner must verify
+the review record before release. Near-duplicate semantic lineage also requires
+that review. Future untouched holdouts need new, independent curation and the
+separate evaluator boundary specified in ADR-003.
+
+The shipped catalogue is [incident-tools-v1](tool-catalog.md). Exact token fit
+of rendered input is checked by the bound backend before any inference; the
+structural validator never guesses token counts from characters.

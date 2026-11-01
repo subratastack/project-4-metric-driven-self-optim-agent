@@ -1,0 +1,20 @@
+{
+  "chat_template_id": "qwen3-two-message-no-thinking-v1",
+  "execution_id": "6a7d215e64510cd373f2437aaca14a9369d4387a1f05e68d95d05f27f7bb4ffc",
+  "implementation_sha256": "72b5cc3d9717bc2bc8cf5fb633b1897187c301712d3eba10a3dcc7cb1f33f764",
+  "model": {
+    "backend": "ollama-raw-generate",
+    "backend_adapter_sha256": "2ed21b36e5ab61f31418f075be193c4f11d9392fd739416646978d1fa330c410",
+    "backend_version": "0.20.0",
+    "context_tokens": 8704,
+    "license_ref": "Apache-2.0; installed-license-sha256:d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "locality": "local",
+    "model_id": "qwen3:14b",
+    "seed_supported": true,
+    "tokenizer_sha256": "4c9a1925dfe4d4e3b872db63b6b3425c2ac3203b3d7f277d6e6cf2262ff02428",
+    "weights_sha256": "a8cc1361f3145dc01f6d77c6c82c9116b9ffe3c97b34716fe20418455876c40e"
+  },
+  "ollama_manifest_sha256": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+  "schema_version": "local-execution-binding/v1",
+  "tokenizer_metadata_sha256": "27b1fe636a04016514d2aa83b89792da06437beef1fcb9cfda669ddfd94b784d"
+}

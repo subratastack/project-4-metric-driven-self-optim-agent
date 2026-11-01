@@ -2,13 +2,14 @@
 
 This is a reference to the [Notion brief](https://app.notion.com/p/3e8456c5513581f89164d6f511de8f70),
 not an implementation checklist authorized for execution. Phase 0 documentation
-is finalized in the [review record](phase-0-review.md). All implementation phases
-remain pending; no optimizer or feature is authorized by this roadmap alone.
+is finalized in its [review record](phase-0-review.md). Phase 1 implementation
+and its execution prerequisites are recorded in the [Phase 1 review](phase-1-review.md).
+Later phases remain pending; this roadmap alone authorizes no optimizer work.
 
 | Phase | Future work | Review gate |
 | --- | --- | --- |
 | 0 | Optimization contract — documentation complete | Architecture, accepted ADRs, dataset schema, metric definitions and frozen baseline contract recorded; executable artifacts remain pending |
-| 1 | Frozen baseline and 50–100 cases | Reproducible baseline, deterministic scorers, isolated splits |
+| 1 | Baseline core, validators, deterministic scorers and 100 draft cases implemented | Qwen3 local binding verified; sampled outputs fail schema; independent label review and fresh holdouts remain prerequisites for release/confirmatory use |
 | 2 | DSPy decision program | Preserve runtime contracts |
 | 3 | MLflow evaluation | Reconstruct runs from tracked evidence |
 | 4 | Reliability and statistics | Paired repeated runs and uncertainty |

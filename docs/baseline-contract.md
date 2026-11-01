@@ -1,8 +1,10 @@
 # Frozen baseline and decision contract v1
 
-**Status:** accepted Phase 0 specification, 2026-10-11. Implementation and the
-first frozen executable artifact remain pending. This document specifies the
-behavior to build; it does not claim that a baseline has been run.
+**Status:** accepted Phase 0 contract; Phase 1 core implementation and content
+freeze completed, 2026-10-11. The [implementation review](phase-1-review.md) records
+verification and the [Qwen3 local binding](qwen3-local-verification.md). Five
+local smoke-test outputs failed schema validation; no full baseline benchmark
+has been run.
 
 The decision program receives one incident snapshot and proposes one next
 step. It cannot execute a tool or change permissions. The baseline is a fixed,
@@ -213,7 +215,8 @@ from this workspace, so integration conformance is explicitly not established.
 
 ## 7. Phase 1 acceptance examples
 
-These are test specifications, not implemented tests:
+These examples are exercised by the Phase 1 unit and evaluation tests. Their
+responses use test doubles or oracle fixtures, not measured model outputs:
 
 | Input/change | Required observation |
 | --- | --- |
